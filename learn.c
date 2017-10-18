@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
   fscanf(file, "%d\n", &K);
   fscanf(file, "%d\n", &N);
-  //printf("K %d, N is %d", K, N);
+  printf("K %d, N is %d", K, N);
 
 
   
@@ -40,7 +40,13 @@ int main(int argc, char *argv[])
   getTrainingData(argv[1], X, Y, N, K);
   //getTestData(argv[2]);
 
-  free(X[i]);
+  for (i=0; i<K; i++)
+    {
+      free(X[i]);
+    }
+  
+  free(X);
+  free(Y);
 
   return 0;
 }

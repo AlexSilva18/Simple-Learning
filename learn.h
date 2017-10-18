@@ -23,10 +23,11 @@ void getTrainingData(char *file, double **X, double *Y, int N, int K)
     {
       for (j=0;j < K ; j++)
 	{
-	  X[i][0] = 1;
+	  //X[i] = 1;
 	  fscanf(fp,"%lf,", &X[i][j]);
+	  fscanf(fp,"%lf",&Y[i]);
 	}
-      fscanf(fp,"%lf",&Y[i]);
+      break;
     }
 
   
@@ -34,7 +35,7 @@ void getTrainingData(char *file, double **X, double *Y, int N, int K)
     {
       for (j=0;j<(K-1); j++)
 	{
-	  printf("%lf\t", X[i][j]);
+	  printf("%lf\t", (&X)[i][j]);
 	  if (j== K-1)
 	    {
 	      printf("\n");
@@ -42,6 +43,7 @@ void getTrainingData(char *file, double **X, double *Y, int N, int K)
 	  
 	}
     }
+  
   
 }
 
