@@ -5,34 +5,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-void getTrainingData(char *file);
+void getTrainingData(char *file, double **X, double *Y,int N, int K);
 void getTestData(char *file);
 
-void getTrainingData(char *file)
+void getTrainingData(char *file, double **X, double *Y, int N, int K)
 {
   FILE *fp = fopen(file, "r");
-  int N, K = 0;
   int i,j;
+  
   
   if (fp == NULL)
     {
       printf("0\n");
     }
-
-  fscanf(fp, "%d\n", &K);
-  fscanf(fp, "%d\n", &N);
-  //printf("K %d, N is %d", K, N);
-
-  float data_matrix[N][K-1];
-
+  
   for (i=0; i<N; i++)
     {
-      for (j=0;j<(K-1); j++)
+      for (j=0;j < K ; j++)
 	{
-	  fscanf(fp,"%f", &data_matrix[i][j]);
-	  if (fscanf(fp, "^,", 
+	  X[i][0] = 1;
+	  fscanf(fp,"%lf,", &X[i][j]);
 	}
-      fscanf(fp,"\n");
+      fscanf(fp,"%lf",&Y[i]);
     }
 
   
@@ -40,15 +34,14 @@ void getTrainingData(char *file)
     {
       for (j=0;j<(K-1); j++)
 	{
-	  printf("%f\t", data_matrix[i][j]);
-	  if (j== K-2)
+	  printf("%lf\t", X[i][j]);
+	  if (j== K-1)
 	    {
 	      printf("\n");
 	    }
-		 
+	  
 	}
     }
-  
   
 }
 
@@ -68,7 +61,8 @@ void getTrainingData(char *file)
        - read 1st line to know the number of attributes to be stored in the Nth lines as attributes (columns)
        - read 2nd line to know how many training examples to be stored as K (rows)
        - last line will be stored as the price in a new matrix (N x 1)
-       - The matrix size is going to be equal to N x K
+       - The matrix size is going to be equal to N x K+1 (where K + 1 is equal to 1 and the values of K)
+       
 */
 
 /*GET TESTING DATA FILES
