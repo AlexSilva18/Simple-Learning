@@ -5,49 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-void getTrainingData(char *file, double **X, double *Y,int N, int K);
+void getTrainingData(FILE *fp, double **X, double *Y,int N, int K);
 void getTestData(char *file);
-
-void getTrainingData(char *file, double **X, double *Y, int N, int K)
-{
-  FILE *fp = fopen(file, "r");
-  int i,j;
-  
-  
-  if (fp == NULL)
-    {
-      printf("0\n");
-    }
-  
-  for (i=0; i<N; i++)
-    {
-      for (j=0;j < K ; j++)
-	{
-	  //X[i] = 1;
-	  fscanf(fp,"%lf,", &X[i][j]);
-	  fscanf(fp,"%lf",&Y[i]);
-	}
-      break;
-    }
-
-  
-  for (i=0; i<N; i++)
-    {
-      for (j=0;j<(K-1); j++)
-	{
-	  printf("%lf\t", (&X)[i][j]);
-	  if (j== K-1)
-	    {
-	      printf("\n");
-	    }
-	  
-	}
-    }
-  
-  
-}
-
-
 
 /*Predict the price of the house for each entry in the test data file*/
 
