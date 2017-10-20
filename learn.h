@@ -7,7 +7,9 @@
 
 void getTrainingData(FILE *fp, double **X, double *Y,int N, int K);
 void getTestData(char *file);
-
+void transposeMatrix(double **X, double **X_transpose, int N, int K);
+void invertMatrix(double **X, double **X_inverse, int N, int K);
+void print(double **X, double *Y, double **X_transpose, int N, int K);
 /*Predict the price of the house for each entry in the test data file*/
 
 /*GET TRAINING DATA FILE
