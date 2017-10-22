@@ -6,10 +6,12 @@
 #include <string.h>
 
 void getTrainingData(FILE *fp, double **X, double *Y,int N, int K);
-void getTestData(char *file);
+void getTestData(FILE *fp, double **attributes, int N2, int K);
 void transposeMatrix(double **X, double **X_transpose, int N, int K);
 void invertMatrix(double **X, double **X_transpose, double **X_inverse, int N, int K);
-void print(double **X, double *Y, double **X_transpose,double **X_inverse, int N, int K);
+void getWeight(double **X_inverse, double **X_transpose, double *Y, double *W, int N, int K);
+void getPrice(double *price, double *W, double **attributes, int N, int K, int N2);
+void print(double **X, double *Y, double **X_transpose, double **X_inverse, double *W, double **attributes, double *price, int N, int K, int N2);
 /*Predict the price of the house for each entry in the test data file*/
 
 /*GET TRAINING DATA FILE
