@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
     }
   
   getTrainingData(file, X, Y, N, K);
-  //getTestData(file2, attributes, N2, K);
+  getTestData(file2, attributes, N2, K);
   transposeMatrix(X, X_transpose, N, K);
   invertMatrix(X, X_transpose, X_inverse, N, K);
-  //getWeight(X_inverse, X_transpose, Y, W, N, K);
-  //getPrice(price, W, attributes, N, K, N2);
+  getWeight(X_inverse, X_transpose, Y, W, N, K);
+  getPrice(price, W, attributes, N, K, N2);
   print(X, Y, X_transpose, X_inverse, W, attributes, price, N, K, N2);
 
   
@@ -164,7 +164,7 @@ void invertMatrix(double **X,double **X_transpose, double **X_inverse, int N, in
 	    }
 	}
     }
-   /*printf("X_inverse\n");
+   printf("X_transpose X X\n");
    //print X_inverse
    for (i=0; i<N; i++)
     {
@@ -176,7 +176,7 @@ void invertMatrix(double **X,double **X_transpose, double **X_inverse, int N, in
 	      printf("\n");
 	    }
 	}
-    }*/
+    }
 
    printf("\n");
    //printf("X_inverse + I\n");
@@ -236,27 +236,28 @@ void invertMatrix(double **X,double **X_transpose, double **X_inverse, int N, in
 	    {
 	      //printf("enter loop\n");
 	      a = 0;
-	      if (i+1 >= N)
+	      k = (k+i+1);
+	      if (k >= N)
 		{
 		  break;
 		}
 	      //printf("step1\n");
-	      k = (k+i+1);
 	      //printf("k is %d\n", k);
-	      
+	      //printf("(K+1) = %d / N = %d\n", k, N);
 	      double temp1 = (-1 * temp_inverse[k][i]) / temp_inverse[i][i];
 	      //printf("step2\n");
 	      //printf("%lf\n", temp1);
 	      while (a < N*2)
 		{
-		  //printf("\n%lf + (%lf *  %lf) \n", X_inverse[k][a],temp1, X_inverse[i][a]);
+		  //printf("\n%lf + (%lf *  %lf) \n", temp_inverse[k][a],temp1, temp_inverse[i][a]);
 		  temp_inverse[k][a] = temp_inverse[k][a] + (temp1 * temp_inverse[i][a]) ;
 		  ++a;
 		}
 	    }
 	}
     }
-
+  //printf("finished\n");
+  
   //Row operations Lower Triangle
   for(i=N-1; i>=0; i--)
     {
@@ -286,7 +287,19 @@ void invertMatrix(double **X,double **X_transpose, double **X_inverse, int N, in
 	    }
 	}
     }
-
+  /*printf("temp_inverse is:\n");
+   for (i=0; i<N; i++)
+	{
+	  for (j=0;j<(N*2); j++)
+	    {
+	      printf("%lf\t", temp_inverse[i][j]);
+	      if (j == ((N*2)-1))
+		{
+		  printf("\n");
+		}
+	    }
+	}*/
+  
 
   /*printf("\nrow operations complete\n");
    //print X_inverse + I
@@ -311,6 +324,18 @@ void invertMatrix(double **X,double **X_transpose, double **X_inverse, int N, in
 	  X_inverse[i][j-N]= temp_inverse[i][j];
 	}  
     }
+  /*printf("X_inverse is:\n");
+   for (i=0; i<N; i++)
+	{
+	  for (j=0;j<(N); j++)
+	    {
+	      printf("%lf\t", X_inverse[i][j]);
+	      if (j == ((N)-1))
+		{
+		  printf("\n");
+		}
+	    }
+	}*/
 
   for (i=0; i<N; i++)
     {
