@@ -437,7 +437,7 @@ void getWeight(double **X_inverse, double **X_transpose, double *Y, double *W, i
 	}
     }*/
 
-  printf("\n");
+  /*printf("\n");
   printf("temp_m is:\n");
   //print X_inverse +
   for (i=0; i<(K+1); i++)
@@ -451,7 +451,7 @@ void getWeight(double **X_inverse, double **X_transpose, double *Y, double *W, i
 	      printf("\n");
 	    }
 	}
-    }
+    }*/
 
   /*printf("\n");
   printf("W is:\n");
@@ -495,10 +495,10 @@ void getPrice(double *price, double *W, double **attributes, int N, int K, int N
 
 void print(double **X, double *Y, double **X_transpose,double **X_inverse, double *W, double **attributes,double *price, int N, int K, int N2)
 {
-  int i,j;
+  int i;//,j;
 
    //Print matrix X
-  printf("\n");
+  /*printf("\n");
   printf("X is \n");
   for (i=0; i<N; i++)
     {
@@ -576,7 +576,7 @@ void print(double **X, double *Y, double **X_transpose,double **X_inverse, doubl
 
   
   printf("\n");
-  printf("price is:\n");
+  printf("price is:\n");*/
   //Print matrix Y
   for (i = 0; i<N2; i++)
     {
